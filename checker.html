@@ -1,6 +1,11 @@
 <html lang="ja">
   <head>
-
+    <style>
+      textarea {
+        width: 100%;
+        height: 15rem;
+      }
+    </style>
   </head>
   <body>
     <h1>答え合わせ</h1>
@@ -10,35 +15,26 @@
           <div class="col">
             <div class="card mb-4 shadow-sm">
             <div class="card-header">
-              <td>
-                <select class="form-select" id="kadai-number" required>
-                  <option value=0>kadai 1</option>
-                  <option value=1>kadai 2</option>
-                  <option value=2 selected></option>
-                </select>
-              </td>
-              <td>
-                <button type="button" class="w-100 btn btn-lg btn-outline-primary" onclick="expectedAnswerClear()">クリア</button>
-              <td>
+              <select class="form-select" id="kadai-number" required>
+                <option value=""></option>
+                <option value=0 selected>kadai 1</option>
+                <option value=1>kadai 2</option>
+              </select>
+              <button type="button" class="w-100 btn btn-lg btn-outline-primary" onclick="expectedAnswerClear()">クリア</button>
             </div>
             <div class="card-body">
-              <textarea id="expected-answer" cols="50" rows="10">
-              </textarea>  
+              <textarea id="expected-answer" cols="50" rows="10" readonly="readonly"></textarea>  
             </div>
           </div><br>
           <div class="col">
             <div class="card mb-4 shadow-sm">
             <div class="card-header">
-              <td>
-                <label class="my-0 fw-normal">YourAnswer</h4>
-              </td>
-              <td>
-                <button type="button" class="w-100 btn btn-lg btn-outline-primary" onclick="yourAnswerClear()">クリア</button>
-              </td>
+              <label class="my-0 fw-normal">YourAnswer</h4>
+              <button type="button" class="w-100 btn btn-lg btn-outline-primary" onclick="yourAnswerClear()">クリア</button>
+              <button type="button" class="w-100 btn btn-lg btn-outline-primary" onclick="compareAnswers()">比較</button>
             </div>
             <div class="card-body">
-              <textarea id="your-answer" cols="50" rows="10">
-              </textarea>  
+              <textarea id="your-answer" cols="50" rows="10" readonly="readonly"></textarea>  
             </div>
           </div>
         </div>

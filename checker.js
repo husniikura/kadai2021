@@ -1,19 +1,65 @@
 const kadais = [];
 
-document.getElementById('kadai-number').addEventListener('change', function(event) {
-    document.getElementById('expected-answer').value = kadais[event.target.value];
+document.addEventListener('DOMContentLoaded', function(){
+  document.getElementById('kadai-number').addEventListener('change', setKadai);
+  setKadai(document.getElementById('kadai-number').value);
 });
 
-function expectedAnswerClear(){
-    document.getElementById('expected-answer').value = null
-}
-function yourAnswerClear(){
-    document.getElementById('your-answer').value = null
+function setKadai(eventOrIdx) {
+  let idx;
+  if (typeof(eventOrIdx) === 'object') {
+    idx = eventOrIdx.target.value;
+    if (idx === '') {
+      expectedAnswerClear();
+      return;
+    }
+      
+  } else if (eventOrIdx === '') {
+    expectedAnswerClear();
+    return;
+  } else {
+    idx = eventOrIdx;
+  }
+  document.getElementById('expected-answer').value = kadais[idx];
 }
 
-console.log = function(args){
-    args.forEach(document.getElementById('your-answer').value in args)
+function expectedAnswerClear(){
+  document.getElementById('expected-answer').value = null
 }
+function yourAnswerClear(){
+  document.getElementById('your-answer').value = null
+}
+
+function newConsoleLog(...args) {
+  let str = "";
+  str += args.map(function(line) {
+    return line;
+  }).join(' ');
+  document.getElementById('your-answer').value += str + "\n";
+}
+console.oldLog = console.log;
+console.log = newConsoleLog;
+
+function compareAnswers() {
+  let expected = document.getElementById('expected-answer').value;
+  let your = document.getElementById('your-answer').value;
+  if (your === expected) {
+    alert('OK');
+  } else {
+    alert('NG');
+    let expectedLines = expected.split("\n");
+    let yourLines = your.split("\n");
+    for (let i=0; i<expectedLines.length; i++) {
+      if (expectedLines[i] !== yourLines[i]) {
+        console.oldLog("LINE_NO: ", i);
+        console.oldLog("expected ans: ", expectedLines[i]);
+        console.oldLog("your answer : ", yourLines[i]);
+        return;
+      }
+    }
+  }
+}
+
 kadais.push(`99 bottles of beer on the wall, 99 bottles of beer.
 Take one down and pass it around, 98 bottles of beer on the wall.
 
@@ -312,7 +358,8 @@ Take one down and pass it around, 1 bottle of beer on the wall.
 Take one down and pass it around, no more bottles of beer on the wall.
 
 No more bottles of beer on the wall, no more bottles of beer.
-Go to the store and buy some more, 99 bottles of beer on the wall.`);
+Go to the store and buy some more, 99 bottles of beer on the wall.
+`);
 
 kadais.push(`35 67 86 98 109 137 139 145 145 147
 157 158 181 184 192 193 212 216 232 244
@@ -323,4 +370,5 @@ kadais.push(`35 67 86 98 109 137 139 145 145 147
 638 643 648 650 653 674 676 686 687 695
 721 722 731 735 749 764 781 796 797 813
 814 821 822 829 847 852 874 910 913 914
-915 923 946 949 950 959 972 973 987 997`);
+915 923 946 949 950 959 972 973 987 997
+`);
