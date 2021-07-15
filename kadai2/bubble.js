@@ -12,10 +12,10 @@ let data = [
 ];
 let N = data.length;
 
-function swap(array, i, j) {
-  let temp = array[j];
-  array[j] = array[i];
-  array[i] = temp;
+function swap(i, j) {
+  let temp = data[j];
+  data[j] = data[i];
+  data[i] = temp;
 }
 
 function output() {

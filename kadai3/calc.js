@@ -34,6 +34,11 @@ document.getElementsByName('operator').forEach(function(element) {
   element.addEventListener('click', onOperatorClicked);
 });
 
+// 現在のステータスを確認するための関数
+function showStatus() {
+  console.log({mode, operator, operand1, operand2});
+}
+
 // TODO この関数を実装すると良い
 function onNumberClicked(event) {
   // 押されたボタンの値は event.target.value で取得できる
